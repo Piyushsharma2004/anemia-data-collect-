@@ -1,0 +1,78 @@
+/* CSS for test_image.html */
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #02394a;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensure the body covers the full viewport height */
+}
+
+/* Container styles */
+#barcode {
+    max-width: 800px;
+    padding: 20px;
+    background-color: #165163;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Barcode form styles */
+#barcodeForm {
+    margin-top: 20px;
+}
+
+/* Submit button styles */
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Patient ID styles */
+#patient_id {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+}
+.login{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+/* Reset default styles for anchor tag */
+a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color */
+  }
+  
+  /* Style for the button */
+  .login_button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #5156b7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width:20%;
+    align-self: center;
+  }
+  
+  /* Hover effect */
+  .login_button:hover {
+    background-color: #353987;
+  }
+  

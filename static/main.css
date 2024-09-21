@@ -1,0 +1,73 @@
+#video {
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px black;
+  /* width: 120%; Set the width to cover 75% of the page */
+  height: auto;
+  /* max-width: 100%;
+  max-height: 100%; */
+  display: block;
+  margin: 0;
+}
+#full_page{
+  display:flex;
+  justify-content: space-between;
+  align-items: start;
+}
+#album {
+  display: flex;
+  /* justify-content: space-between;
+  flex-wrap: wrap; */
+}
+.album_item{
+  flex: 1 0 auto;
+  height: 100%;
+}
+
+.album_item:before {
+  content: '';
+  display: block;
+  /* padding-top: 100%; */
+}
+#photo1, #photo2, #photo3 {
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px black;
+  /* width: 320px; */
+  /* height: 240px; */
+}
+
+#canvas {
+  display: none;
+}
+
+.camera {
+  width: auto;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.album {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#startbutton {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 32px;
+  background-color: rgba(0, 150, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  color: rgba(255, 255, 255, 1.0);
+}
+
+.contentarea {
+  font-size: 16px;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  width: 760px;
+  margin: 0 auto;
+}

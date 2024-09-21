@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{%load static%}
+        {%block head%}
+        <head>
+            <link rel="stylesheet" href="{% static 'test.css' %}" type="text/css" media="all">
+            <script type="module" src="{% static 'camera.js' %}"></script>
+        </head>
+        {%endblock%}
+{% block content %}
+<form method="post" name="inputForm" action="/data/send/" enctype='multipart/form-data'>
+    {% csrf_token %}
+    <div class = "form-content">
+    <div id="video-container">
+        <canvas id="canvas"></canvas>
+        <video id="video">
+            <!-- Your video source here -->
+        </video>
+        
+    </div>
+
+    <div id="boxes-container">
+        <div class="box">
+            <div class = "holder">
+            <img class = "result" id="eye" name="eye" >
+            </div>
+            <div>
+            <input type="button" id="eye_button" class = "photo_button" name="eyes" value = "CLICK">
+            <input type="hidden" id="eye_hidden" name="eye" value="" style="background-color:black">
+            </div>
+        </div>
+        <div class="box">
+            <div class = "holder">
+            <img class = "result" id="palm" name="palms">
+            </div>
+            <input type="hidden" id="palm_hidden" name="palm" value="">
+            <input type="button" id="palm_button" class = "photo_button" name="palm" value = "CLICK">
+        </div>
+        <div class="box">
+            <div class = "holder">
+            <img class = "result" id="nails" name="nails">
+            </div>
+            <div>
+            <input type="hidden" id="nails_hidden" name="nails" value="">
+            <input type="button" id="nails_button" class = "photo_button" name="nails" value = "CLICK">
+            </div>
+        </div>
+        <div class="box">
+            <div class = "holder">
+            <img class = "result" id="full" name="full">
+            </div>
+            <div>
+            <input type="hidden" id="full_hidden" name="full" value="">
+            <input type="button" id="full_button" class = "photo_button" name="full" value = "CLICK">
+            </div>
+        </div>
+    </div>
+    </div>
+    <center>
+    <div class="button">
+        <div id = "patient_id" style = "font-size:30px"><h2 id="patient_id_value"> Patient ID: #{{ patient_id }}</h2></div>
+        <div>
+        <input type="hidden" id="patient_id_hidden" name="patient_id" value="{{ patient_id }}">
+        {% comment %} <script>
+            document.getElementById("patient_id_hidden").value ={{ patient_id }};
+        </script> {% endcomment %}
+        <input type="submit" value="Submit" id="submit">    
+    </div>
+    </center>
+</div>
+</form>
+</body>
+{% endblock %}
+

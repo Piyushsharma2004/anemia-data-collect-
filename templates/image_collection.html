@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    {% block content %}
+    {% load static %}
+    <head>
+        <title>VisionApp</title>
+        <meta charset='utf-8'>
+        <link rel="stylesheet" href="{% static 'main.css' %}" type="text/css" media="all">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="module" src="{% static 'camera.js' %}"></script>
+    </head>
+    <body>
+        <div class="contentarea">
+            <div class="Input">
+                <form method="post" name="inputForm" action="/data/collect/" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    <div id = "full_page">
+                    <div style = "position:relative">
+                        <video id="video">Video stream not available.</video>
+                    </div>
+                    <div id="camera" class="camera">
+                        <button id="startbutton" type="button">Take photo</button>
+                        {% comment %} <button id="start" type="button">Start</button> {% endcomment %}
+                        <input id="webimg" value="" name="src" type="text" style="display: none;">
+                        <canvas id="canvas"></canvas>
+                    </div>
+                    <div id="album">
+                        <div>
+                            <img id="eye" name="hand" class = "album_item"alt="your image">
+                            <input type="hidden" name="img" id="hi1" value="">
+                        </div>
+                        <div>
+                            <img id="photo1" name="hand1" class = "album_item" alt="your image">
+                            <input type="hidden" name="img1" id="hi2" value="">
+                        </div>
+                        <div>
+                            <img id="photo2" name="hand2" class = "album_item" alt="your image">
+                            <input type="hidden" name="img2" id="hi3" value="">
+                        </div>
+                        <div>
+                            <img id="photo3" name="hand3" class = "album_item" alt="your image">
+                            <input type="hidden" name="img3" id="hi4" value="">
+                        </div>
+                    </div>
+                    {% comment %} <input type="text" name="username" > {% endcomment %}
+                    {% comment %} <button type="submit" class="button" id="submit">Submit</button> {% endcomment %}
+                    
+                </form>
+                </div>
+            
+           <img src="{{ path }}" alt="The screen capture will appear in this box.">
+        </div>
+    </div>
+    </div>
+    </body>
+    {% endblock %}
+</html>

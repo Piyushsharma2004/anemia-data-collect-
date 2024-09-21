@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anemia Detection</title>
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        .mainHolder {
+            background: yellow;
+            display: flex;
+            width: 100vw;
+            height: 80vh;
+        }
+
+        .vedioHold {
+            background: red;
+            width: 60%;
+        }
+
+        .showcase {
+            width: 40%;
+            display: flex;
+            position: relative;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .cap {
+            display: inline-block;
+            width: 40%;
+            height: 40%;
+            border: 1px solid black;
+        }
+
+        .cap:hover {
+            cursor: pointer;
+        }
+
+        .bottom {
+            background: purple;
+            text-align: center;
+        }
+
+        .username {
+            border: none;
+            font-size: 20px;
+            padding: 10px;
+            margin: 20px;
+        }
+
+        #video {
+            width: 100%;
+            height: 100%;
+        }
+        #canvas{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mainHolder">
+        <div class="vedioHold">
+            <video id="video">Video stream not available.</video>
+        </div>
+        <div class="showcase">
+            <img class="cap img1" id="nail"></img>
+            <img class="cap img2" id="palm"></img>
+            <img class="cap img3" id="hand"></img>
+            <img class="cap img4" id="eyes"></img>
+        </div>
+    </div>
+    <div class="bottom">
+        <input type="text" class="username" name="username" placeholder="User Id here">
+    </div>
+
+    <canvas id="canvas">
+    </canvas>
+
+    <script>
+        (function () {
+            // The width and height of the captured photo. We will set the
+            // width to the value defined here, but the height will be
+            // calculated based on the aspect ratio of the input stream.
+
+            var width = 640;    // We will scale the photo width to this
+            var height = 0;     // This will be computed based on the input stream
+
+            var streaming = false;
+
+            var video = null;
+            var canvas = null;
+            // var photo = null;
+            // var startbutton = null;
+            var imgBox = null;
+            var nail = null;
+            var palm = null;
+            var hand = null;
+            var eyes = null;
+
+            function startup() {
+                video = document.getElementById('video');
+                canvas = document.getElementById('canvas');
+                // photo = document.getElementById('photo');
+                // startbutton = document.getElementById('startbutton');
+                nail = document.getElementById('nail');
+                palm = document.getElementById('palm');
+                hand = document.getElementById('hand');
+                eyes = document.getElementById('eyes');
+
+                imgBox = document.getElementById('hi');
+
+                navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+                    .then(function (stream) {
+                        video.srcObject = stream;
+                        video.play();
+                    })
+                    .catch(function (err) {
+                        console.log("An error occurred: " + err);
+                    });
+
+                video.addEventListener('canplay', function (ev) {
+                    if (!streaming) {
+                        height = video.videoHeight / (video.videoWidth / width);
+
+                        if (isNaN(height)) {
+                            height = width / (4 / 3);
+                        }
+
+                        video.setAttribute('width', width);
+                        video.setAttribute('height', height);
+                        streaming = true;
+                    }
+                }, false);
+
+                // startbutton.addEventListener('click', function (ev) {
+                //     takepicture();
+                //     ev.preventDefault();
+                // }, false);
+
+                
+                nail.addEventListener('click', function(ev){
+                    takepicture("nail");
+                    ev.preventDefault();
+                }, false);
+
+                palm.addEventListener('click', function(ev){
+                    takepicture("palm");
+                    ev.preventDefault();
+                }, false);
+
+                hand.addEventListener('click', function(ev){
+                    takepicture("hand");
+                    ev.preventDefault();
+                }, false);
+
+                eyes.addEventListener('click', function(ev){
+                    takepicture("eyes");
+                    ev.preventDefault();
+                }, false);
+
+                // clearphoto();
+            }
+
+            // Fill the photo with an indication that none has been
+            // captured.
+
+            function clearphoto() {
+                var context = canvas.getContext('2d');
+                context.fillStyle = "#AAA";
+                context.fillRect(0, 0, canvas.width, canvas.height);
+
+                var data = canvas.toDataURL('image/png');
+                // photo.setAttribute('src', data);
+                // var encodedImageData = encodeURIComponent(data);
+                // console.log(data)
+                // imgBox.value = data;
+            }
+
+            // Capture a photo by fetching the current contents of the video
+            // and drawing it into a canvas, then converting that to a PNG
+            // format data URL. By drawing it on an offscreen canvas and then
+            // drawing that to the screen, we can change its size and/or apply
+            // other changes before drawing it.
+
+            function takepicture(to='nail') {
+                var context = canvas.getContext('2d');
+                console.log(width, height);
+                if (width && height) {
+                    canvas.width = width;
+                    canvas.height = height;
+                    context.drawImage(video, 0, 0, width, height);
+
+                    var data = canvas.toDataURL('image/png');
+                    // photo.setAttribute('src', data);
+                    console.log(data)
+                    // imgBox.value = data;
+                    if(to=="nail"){
+                        nail.src = data;
+                    }
+                    else if(to=="palm"){
+                        palm.src = data;
+                    }
+                    else if(to=='hand'){
+                        hand.src = data;
+                    }
+                    else if(to == "eyes"){
+                        eyes.src = data;
+                    }
+                } else {
+                    clearphoto();
+                }
+            }
+
+            // Set up our event listener to run the startup process
+            // once loading is complete.
+            window.addEventListener('load', startup, false);
+        })();
+    </script>
+</body>
+
+</html>

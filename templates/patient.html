@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+    {%block head%}
+    <head>
+    <title>Barcode</title>
+    <script type="module" src="{% static 'barcode.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'barcode.css' %}" type="text/css" media="all">
+</head>
+    {%endblock%}
+{%block content%}
+    {%if request.user.is_authenticated%}
+    <div id="barcode"><h2 id = "barcodeDisplay">Scan a barcode</h2></div>
+
+    <form id="barcodeForm" action="/data/barcode/" method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <input type="hidden" name="barcode" id="barcodeValue" value="">
+        {% comment %} <input type="submit" value="Submit" > {% endcomment %}
+    </form>
+    {% else %}
+    <div class = "login">
+    <h1>You are not logged in</h1>
+    <a href="/login" class = "login_button">Login</a>
+    </div>
+    {% endif %}
+{%endblock%}
